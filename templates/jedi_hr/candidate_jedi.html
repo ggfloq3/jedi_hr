@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    <h3>Кандидат {{ candidate.name }}</h3>
+    <hr>
+
+    {% if answers %}
+        <h5>Результаты теста :</h5>
+        <table class="table table-striped table-hover ">
+            <thead>
+            <tr>
+                <th>Вопрос</th>
+                <th>Ответ</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for x in answers %}
+                <tr class="{% if x.is_right %}success{% else %}danger{% endif %}">
+                    <td>        {{ x.question.text }}</td>
+                    <td>  {% if x.answer %}Да{% else %}Нет{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h5>Кандидат не стал проходить тест</h5>
+    {% endif %}
+    <br>
+    {% if not candidate.jedi_master_id or form.non_field_errors %}
+        <form class="form" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Взять в ученики</button>
+            {% endbuttons %}
+        </form>
+    {% else %}
+        <h5>{{ candidate.name }} зачислен в падаваны. Учитель : {{ candidate.jedi_master }}</h5>
+    {% endif %}
+{% endblock %}

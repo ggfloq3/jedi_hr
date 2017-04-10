@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="btn-group btn-group-justified">
+        <a href="?show_count=1" class="btn btn-default btn-link">Показать количество падаванов</a>
+        <a href="?padawans=1" class="btn btn-default btn-link">Джедаи с более чем одним падаваном</a>
+    </div>
+    <br>
+    <br>
+    {% for x in jedi_list %}
+        <a href="{{ x.get_absolute_url }}" style="text-decoration: none">
+            <button type="button" class="btn btn-default btn-block">
+                {{ x.name }}{% if show_count %} | Количество падаванов : {{ x.padawan_count }}{% endif %}</button>
+        </a>
+        <br>
+    {% endfor %}
+{% endblock %}

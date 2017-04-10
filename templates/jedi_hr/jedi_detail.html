@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h5> Здравствуйте, {{ jedi.name }} !</h5>
+    <hr>
+    {% if candidates %}
+        <p>Кандидаты : </p>
+        <table class="table table-striped table-hover ">
+            <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Возраст</th>
+                <th>Тест пройден</th>
+                <th>Подробнее</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for x in candidates %}
+                <tr class="{% if x.candidateanswer__count %}success{% else %}danger{% endif %}">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.age }}</td>
+                    <td>{% if x.candidateanswer__count %}Да{% else %}Нет{% endif %}</td>
+                    <td><a href="{% url 'jedi_candidate' pk=jedi.pk candidate_pk=x.id %}"> Перейти </a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% for x in candidates %}
+
+        {% endfor %}
+    {% else %}
+        <p>Кандидатов с вашей планеты нет, приходите позже</p>
+    {% endif %}
+{% endblock %}

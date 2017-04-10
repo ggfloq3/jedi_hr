@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <a href="{% url 'candidate_new' %}" style="text-decoration: none">
+    <button  type="button" class="btn btn-default btn-block">Для кандидатов</button>
+    </a>
+    <br>
+    <a href="{% url 'jedi_list' %}" style="text-decoration: none">
+    <button  type="button" class="btn btn-default btn-block">Для джедаев</button>
+    </a>
+{% endblock %}
